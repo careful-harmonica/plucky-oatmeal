@@ -143,7 +143,9 @@ micControllers.controller('AudienceControl', ['$scope', '$sce', 'audienceRTC', '
       }
     };
 
-
+    $scope.sendFeedback = function(index){
+      audienceRTC.sendFeedback($scope.feedback[index]);
+    }
 
     // if you your handler updates the $scope, you need to call $scope.$apply
     // so angular knows to run a digest.
@@ -191,19 +193,24 @@ micControllers.controller('PresenterControl', ['$scope', '$sce', 'presenterRTC',
     document.getElementById('videos').appendChild(vid);
   };
 
-  presenterRTC.displayFeeedback = function(feedback) {
-    $scope.feedback = feedback;
+  var feedbackOptions = {
+    'THRWOAAME': 0,
+    'PTWGFMD': 0,
+    'FTWEFM': 0,
+    'WNTR': 0,
+    'BTWU': 0,
+    'CTWBFMD': 0,
+    'BHRFSOME': 0
   };
 
-  $scope.feedback = {
-    'THRWOAAME': 3,
-    'PTWGFMD': 6,
-    'FTWEFM': 3,
-    'WNTR': 4,
-    'BTWU': 1,
-    'CTWBFMD': 2,
-    'BHRFSOME': 1,
+  presenterRTC.displayFeedback = function(feedback) {
+    for (var k in feedback) {
+      $scope.feedback[k] = feedback[k];
+    }
+    $scope.$apply();
   };
+
+  $scope.feedback = feedbackOptions;
 
   $scope.connections = [];
   console.log($rootScope.details);

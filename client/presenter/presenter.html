@@ -4,14 +4,15 @@
       <h1>Connections count: {{connections.length}}</h1>
       <div id="videos"></div>
     </div>
-    <div ng-repeat="(key, val) in feedback" class="feedback">
-    <div class="chart" style="background-color: blue; width: {{'10' * val + 'px'}}">{{val}}</div>
-    </div>
     <div class="large-6 columns">
       <h1>Participants currently in the room</h1>
       <ul ng-repeat="connection in connections">
         <li> {{ connection.user }} </li>
       </ul>
+    </div>
+    <div ng-repeat="(key, val) in feedback | orderBy: -val" class="chart">
+      <span>{{ key }}</span>
+      <div style="width: {{ 20 + ('10' * val) + 'px' }}">{{ val }}</div>
     </div>
 </div>
 <div class="row" style="margin-top:6.0em">

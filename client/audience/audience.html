@@ -3,7 +3,7 @@
     <video id="local-video" autoplay muted style="width:40%;" ng-src="{{localStream}}"></video>
     <button ng-click="connectionManager()">{{ micStatus.command }}</button>
   </div>
-  <div ng-repeat="feed in feedback" class="feedback">
+  <div ng-repeat="feed in feedback" class="feedback" ng-click="sendFeedback($index)">
     <button>{{ feed }}</button>
   </div>
 </div>
