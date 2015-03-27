@@ -175,7 +175,7 @@ io.on('connection', function (socket) {
     console.log('broadcasting message', message);
     io.emit('msg', message);
 
-    if (message.room.name) {
+    if (rooms[message.room.name]) {
       rooms[message.room.name].presenterSocket = socket;
       console.log(rooms);
     }
@@ -184,7 +184,7 @@ io.on('connection', function (socket) {
   // Listen for user feedback and broadcast it to the presenter
   socket.on('feedback', function (message) {
     feedback[message.type] = feedback[message.type] + 1 || 1;
-    
+
     if (message.room.roomname) {
       rooms[message.room.roomname].presenterSocket.emit('feedback', feedback);
     }
