@@ -191,3 +191,25 @@ div.first a{
 .feedback button {
   background: #18A488;
 }
+
+.chart div {
+  font: 18px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+  height: 30px;
+  display: inline-block;
+}
+
+.chart span {
+  font-weight: 500;
+  color: white;
+  margin-right: 10px;
+}
+
+.chart {
+  margin: 5px;
+  margin-left: 40px;
+}
