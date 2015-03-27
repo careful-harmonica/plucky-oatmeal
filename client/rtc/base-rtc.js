@@ -277,7 +277,6 @@ var makeBaseRTC = function (options) {
 
   // Feedback functionality
   var onFeedback = function(feedback) {
-    console.log(feedback);
     this.displayFeedback(feedback);
   };
 
