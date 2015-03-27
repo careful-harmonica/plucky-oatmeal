@@ -4,15 +4,16 @@
       <h1>Connections count: {{connections.length}}</h1>
       <div id="videos"></div>
     </div>
+    <div ng-repeat="(key, val) in feedback" class="feedback">
+    <div class="chart" style="background-color: blue; width: {{'10' * val + 'px'}}">{{val}}</div>
+    </div>
     <div class="large-6 columns">
       <h1>Participants currently in the room</h1>
       <ul ng-repeat="connection in connections">
         <li> {{ connection.user }} </li>
       </ul>
     </div>
-  </div>
 </div>
-
 <div class="row" style="margin-top:6.0em">
   <div class="large-12 columns">
     <a href="#/main" class="closingTime" style="background-color:#E95F44">End the session</a>

@@ -106,6 +106,7 @@ micControllers.controller('AudienceControl', ['$scope', '$sce', 'audienceRTC', '
     'BHRFSOME'
   ];
 
+
   // only provide connect and disconnect functionality after ready (signal server is up, we have a media stream)
   audienceRTC.ready(function () {
     $scope.roomName = $rootScope.details.roomname.slice();
@@ -188,6 +189,20 @@ micControllers.controller('PresenterControl', ['$scope', '$sce', 'presenterRTC',
     vid.autoplay = true;
     vid.src = url;
     document.getElementById('videos').appendChild(vid);
+  };
+
+  presenterRTC.displayFeeedback = function(feedback) {
+    $scope.feedback = feedback;
+  };
+
+  $scope.feedback = {
+    'THRWOAAME': 3,
+    'PTWGFMD': 6,
+    'FTWEFM': 3,
+    'WNTR': 4,
+    'BTWU': 1,
+    'CTWBFMD': 2,
+    'BHRFSOME': 1,
   };
 
   $scope.connections = [];
