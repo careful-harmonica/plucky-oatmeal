@@ -184,7 +184,9 @@ io.on('connection', function (socket) {
   // Listen for user feedback and broadcast it to the presenter
   socket.on('feedback', function (message) {
     feedback[message.type] = feedback[message.type] + 1 || 1;
-    rooms[message.room.roomname].presenterSocket.emit('feedback', feedback);
-    console.log(feedback[message.type]);
+    
+    if (message.room.roomname) {
+      rooms[message.room.roomname].presenterSocket.emit('feedback', feedback);
+    }
   });
 });
