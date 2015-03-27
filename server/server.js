@@ -161,15 +161,30 @@ var server = app.listen(servePort, function(){
 // client that sent it (which we need for our test code to run with both
 // RTC clients in same browser... I think).
 var io = require('socket.io')(server);
+var presenters = {};
+var feedback = {};
 
 // When we get new connections, set each connection up with
 // an onmessage handler that will broadcast any messages it
 // sends to all other connections (using the broadcast utility fn above)
 io.on('connection', function (socket) {
   console.log('Received connection');
-  socket.emit('msg', {hello: 'world'});
+
+  // Wait for an ice `msg` from the client and broadcast it to all open ockets
   socket.on('msg', function (message) {
     console.log('broadcasting message', message);
     io.emit('msg', message);
+
+    if (message.room.name) {
+      rooms[message.room.name].presenterSocket = socket;
+      console.log(rooms);
+    }
+  });
+
+  // Listen for user feedback and broadcast it to the presenter
+  socket.on('feedback', function (message) {
+    feedback[message.type] = feedback[message.type] + 1 || 1;
+    rooms[message.room.roomname].presenterSocket.emit('feedback', feedback);
+    console.log(feedback[message.type]);
   });
 });

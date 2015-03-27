@@ -200,6 +200,14 @@ var makeBaseRTC = function (options) {
     });
   };
 
+  baseRTC.sendFeedback = function(type) {
+    this.signalServer.emit('feedback', {
+      sender: this.me,
+      room: this.room,
+      type: type
+    })
+  };
+
   // Handles the process of peers accepting offers from other peers.
   // Message structure is described in _send.
   var onMessage = function (message) {
@@ -266,6 +274,14 @@ var makeBaseRTC = function (options) {
   // baseRTC.signalServer.on('msg', function(message) {
   //   console.log('Got message from server', message);
   // })
+
+  // Feedback functionality
+  var onFeedback = function(feedback) {
+    console.log(feedback);
+    this.displayFeedback(feedback);
+  };
+
+  baseRTC.signalServer.on('feedback', onFeedback.bind(baseRTC));
 
   // Peer connections emit events, like onaddstream and onremovestream.
   // .on allows you to specify handlers for those events. The handler

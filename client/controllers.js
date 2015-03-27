@@ -143,7 +143,9 @@ micControllers.controller('AudienceControl', ['$scope', '$sce', 'audienceRTC', '
       }
     };
 
-
+    $scope.sendFeedback = function(index){
+      audienceRTC.sendFeedback($scope.feedback[index]);
+    }
 
     // if you your handler updates the $scope, you need to call $scope.$apply
     // so angular knows to run a digest.
