@@ -119,6 +119,8 @@ micControllers.controller('AudienceControl', ['$scope', '$sce', 'audienceRTC', '
     //   you need to inject $sce as a dependency (part of angular-sanitize, included in baseRTC)
     $scope.localStream = $sce.trustAsResourceUrl(window.URL.createObjectURL(audienceRTC.localStream));
 
+    audienceRTC.init($scope.roomName, $scope.username);
+
     // utilize the audienceRTC factory (injected into the controller) to establish a connection with the presenter.
     // audienceRTC.connect will trigger baseRTC's connectToUser method.
     var openPeerConnection = function(roomName, presenter, username){
@@ -143,7 +145,7 @@ micControllers.controller('AudienceControl', ['$scope', '$sce', 'audienceRTC', '
       }
     };
 
-    $scope.sendFeedback = function(index){
+    $scope.sendFeedback = function(index) {
       audienceRTC.sendFeedback($scope.feedback[index]);
     }
 

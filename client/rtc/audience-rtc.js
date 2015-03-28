@@ -8,17 +8,18 @@ angular.module('ribbitAudienceRTC', ['ribbitBaseRTC', 'ngSanitize'])
     // Get local media right away
     baseRTC.getMedia({ audio: true, video: true }); //TODO: take video out when done debugging
 
-    baseRTC.connect = function (room, user) {
+    baseRTC.init = function(room, user) {
       this.room = room;
       this.me = user;
+    }
+
+    baseRTC.connect = function (room, user) {
       this.connectToUser(room.presenter);
     };
 
     baseRTC.disconnect = function(room, user){
       this.disconnectFromUser(room.presenter);
     };
-    
+
     return baseRTC;
   });
-
-

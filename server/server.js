@@ -175,7 +175,7 @@ io.on('connection', function (socket) {
     console.log('broadcasting message', message);
     io.emit('msg', message);
 
-    if (rooms[message.room.name]) {
+    if (message.room.name) {
       rooms[message.room.name].presenterSocket = socket;
       console.log(rooms);
     }
@@ -185,8 +185,8 @@ io.on('connection', function (socket) {
   socket.on('feedback', function (message) {
     feedback[message.type] = feedback[message.type] + 1 || 1;
 
-    if (message.room.roomname) {
-      rooms[message.room.roomname].presenterSocket.emit('feedback', feedback);
+    if (message.room) {
+      rooms[message.room].presenterSocket.emit('feedback', feedback);
     }
   });
 });
