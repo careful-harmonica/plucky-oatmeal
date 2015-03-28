@@ -170,7 +170,9 @@ var feedback = {};
 io.on('connection', function (socket) {
   console.log('Received connection');
 
-  // Wait for an ice `msg` from the client and broadcast it to all open ockets
+  socket.emit('text', 'Connected to signal server');
+
+  // Wait for an ice `msg` from the client and broadcast it to all open sockets
   socket.on('msg', function (message) {
     console.log('broadcasting message', message);
     io.emit('msg', message);
@@ -185,7 +187,7 @@ io.on('connection', function (socket) {
   socket.on('feedback', function (message) {
     feedback[message.type] = feedback[message.type] + 1 || 1;
 
-    if (message.room) {
+    if (rooms[message.room]) {
       rooms[message.room].presenterSocket.emit('feedback', feedback);
     }
   });
